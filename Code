@@ -1,0 +1,21 @@
+default
+{
+    state_entry()
+    {
+        llSetText("Get Contents", <0.5, 0.0, 1.0>, 0.9);
+    }
+    touch_start (integer num)
+    {
+       list InvList;
+       integer count = llGetInventoryNumber(INVENTORY_ALL);
+       string Name;
+       while (count--)
+       {
+           Name = llGetInventoryName(INVENTORY_ALL, count);
+           if (Name != llGetScriptName())
+           InvList += (Name);
+        }
+        llGiveInventoryList(llDetectedKey(0), llGetObjectName(), InvList);
+        llSay(0, "Being delivered...");
+    }
+}
